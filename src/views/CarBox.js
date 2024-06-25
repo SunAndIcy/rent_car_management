@@ -17,11 +17,15 @@ export default function CarBox() {
         token: { colorBgContainer, borderRadiusLG },
       } = theme.useToken();
 
+      const toggleCollapsed = () => {
+        setCollapsed(!collapsed);
+      };
+    
     return (
       <Layout>
-       <SideMenu></SideMenu>
+       <SideMenu collapsed={collapsed} ></SideMenu>
         <Layout>
-          <TopHeader collapsed={collapsed} setCollapsed={setCollapsed} />
+          <TopHeader toggleCollapsed={toggleCollapsed} collapsed={collapsed} />
           <Content
                 style={{
                     margin: '24px 16px',

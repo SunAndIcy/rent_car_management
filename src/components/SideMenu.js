@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const { Sider } = Layout;
 
-export default function SideMenu() {
+export default function SideMenu({ collapsed }) {
 
 const menuList = [
   {
@@ -22,7 +22,6 @@ const menuList = [
       {
         key: "/user-manage/list",
         label: "User List",
-        // icon: <VideoCameraOutlined />,
       }
     ]
   },
@@ -34,7 +33,6 @@ const menuList = [
       {
         key: "/car-manage/list",
         label: "Car List",
-        // icon: <VideoCameraOutlined />,
       }
     ]
   },
@@ -46,7 +44,6 @@ const menuList = [
       {
         key: "/rent-manage/list",
         label: "Rent List",
-        // icon: <VideoCameraOutlined />,
       }
     ]
   },
@@ -70,8 +67,6 @@ const renderMenuItems = (menuList) => {
   });
 };
 
-
-  const [collapsed, setCollapsed] = useState(false);
 
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>

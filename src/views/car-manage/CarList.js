@@ -7,6 +7,7 @@ import {
   } from '@ant-design/icons';
 import CarForm from '../../components/car-manage/CarForm';
 import dayjs from 'dayjs';
+import axiosInstance from '../../utils/AxiosInstance';
 
 export default function CarList() {
     const [dataSource, setDataSource] = useState([])
@@ -29,11 +30,11 @@ export default function CarList() {
       }, []);
 
     const handleDelete = (item)=>{
-        axios.delete(`https://carrentalsystem-backend.azurewebsites.net/api/Cars/${item.id}`)
+        axiosInstance.delete(`/api/Cars/${item.Id}`)
         .then((response) => {
         
-         console.log('Delete successful:', response.data);
-         const updatedDataSource = dataSource.filter(data => data.id !== item.id);
+         console.log('Delete successful:', response);
+         const updatedDataSource = dataSource.filter(data => data.Id !== item.Id);
          setDataSource(updatedDataSource);
 
         })
@@ -60,10 +61,9 @@ export default function CarList() {
             Price_Per_Day: Price_Per_Day,
           };
           
-        axios.post('https://carrentalsystem-backend.azurewebsites.net/api/Cars', postData)
+        axiosInstance.post('/api/Cars', postData)
         .then(response => {
-            console.log('Response:', response.data);
-            setDataSource([...dataSource, response.data]);
+            setDataSource([...dataSource, response]);
         })
         .catch(error => {
             console.error('Error:', error);
@@ -105,11 +105,11 @@ export default function CarList() {
                 Price_Per_Day: Price_Per_Day,
               };
               
-              axios.put(`https://carrentalsystem-backend.azurewebsites.net/api/Cars/${currentUpdate.id}`, updatedData)
+              axiosInstance.put(`/api/Cars/${currentUpdate.Id}`, updatedData)
               .then(response => {
                 console.log('Update successful:', response.data);
                 const updatedDataSource = dataSource.map(item => {
-                    if (item.id === currentUpdate.id) {
+                    if (item.Id === currentUpdate.Id) {
                       return response.data;
                     }
                     return item;

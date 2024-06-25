@@ -5,8 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const { Header } = Layout;
 
-export default function TopHeader() {
-  const [collapsed, setCollapsed] = useState(false);
+export default function TopHeader({toggleCollapsed, collapsed}) {
   const navigate = useNavigate();
 
   const {
@@ -14,17 +13,17 @@ export default function TopHeader() {
   } = theme.useToken();
 
   const handleLogout = ()=>{
-    localStorage.removeItem("token")
+    localStorage.removeItem("admin")
     navigate('/login');
   }
 
-  const {UserName} = JSON.parse(localStorage.getItem("token"))
+  const {Username} = JSON.parse(localStorage.getItem("admin"))
 
   const items = [
     {
       key: '1',
       label: (
-        <span>{UserName}</span>
+        <span>Admin: {Username}</span>
       ),
     },
     {
@@ -45,22 +44,22 @@ export default function TopHeader() {
       <Button
         type="text"
         icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        onClick={() => setCollapsed(!collapsed)}
+        onClick={toggleCollapsed}
         style={{ fontSize: '16px', width: 64, height: 64 }}
       />
       <div style={{float:"right"}}>
-        <span style={{"paddingRight":"10px"}}>Welcome <span style={{color:"#1890ff"}}>{UserName}</span> Back</span>
+        <span style={{"paddingRight":"10px"}}>Welcome <span style={{color:"#1890ff"}}>{Username}</span> Back</span>
         <Dropdown
-            menu={{
-            items,
-            }}
-        >
-            <a onClick={(e) => e.preventDefault()}>
-            <Space>
-                <Avatar size="large" icon={<UserOutlined />} />
-            </Space>
-            </a>
-        </Dropdown>
+              menu={{
+                  items,
+              }}
+          >
+              <a onClick={(e) => e.preventDefault()} style={{ paddingRight: '8px' }}>
+                  <Space>
+                      <Avatar size="large" icon={<UserOutlined />}/>
+                  </Space>
+              </a>
+          </Dropdown>
      </div>
     </Header>
   );

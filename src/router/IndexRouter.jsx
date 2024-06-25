@@ -16,7 +16,7 @@ export default function IndexRouter() {
 
 function ProtectedRoute() {
   // 检查是否已经登录
-  const isLoggedIn = localStorage.getItem("token");
+  const isLoggedIn = localStorage.getItem("admin");
 
   return isLoggedIn ? <CarBox /> : <Navigate to="/login" />;
 }

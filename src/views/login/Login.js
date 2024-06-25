@@ -1,96 +1,93 @@
- import React from 'react';
-import { Button, Checkbox, Form, Input, message } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Form, Input, Button, Checkbox, message } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import Cookies from 'js-cookie';
+
 
 
 export default function Login() {
-  
 
-  const [form] = Form.useForm();
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [token, setToken] = useState(Cookies.get('token') || '');
+
   const navigate = useNavigate();
 
-  const handleSignUpClick = (e) => {
+  const onFinish = (values) => {
+    console.log('Received values:', values);
 
-    const {username, password} = form.getFieldsValue();
+    const {email, password} = values;
+    
     const postData = {
-        UserName : username,
+        Email : email,
         Password : password,
-        IsAdmin : true
+        // IsAdmin : true
     };
-      
-    axios.post('https://carrentalsystem-backend.azurewebsites.net/api/Users', postData)
-    .then(response => {
-        console.log('Response:', response.data); 
-        // 判断是否注册成功
-        message.success('Sign up successful, please login');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        message.success('Sign up successful, please login');
-    });
+
+    axios.post('https://carrentalsystem-backend.azurewebsites.net/api/Auth/login', postData)
+        .then(response => {
+            console.log('Response:', response.data); 
+            if (response.data.Message === 'Login successful') {  
+                // 设置token                  
+                const authToken = response.data.Token;
+                Cookies.set('token', authToken, { expires: 7, path: '/' }); 
+                setToken(authToken); 
+                
+                // 保存user
+                localStorage.setItem('admin',JSON.stringify(response.data.user));
+                setLoggedInUser(response.data.user.Username); 
+
+                message.success('Sign in successful');
+                navigate('/');
+            } else {
+                message.error('Failed to sign in, the email or password not correct, please try again later');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            message.error('Failed to sign in, the email or password not correct, please try again later');
+        });
   };
 
-  const handleSignInClick = (e) => {
-      const {username, password} = form.getFieldsValue();
-
-      const userInfo = {
-        UserName : username,
-        Password : password,
-        IsAdmin : true
-      };
-
-      axios.get(`https://carrentalsystem-backend.azurewebsites.net/api/Users/UserName/${username}`)
-      .then((response) => {
-          const data = response.data;
-          localStorage.setItem('token', JSON.stringify(userInfo));
-          navigate('/');
-      })
-      .catch((error) => {
-      console.error('Sign in Error:', error);
-          localStorage.setItem('token', JSON.stringify(userInfo));
-          navigate('/');
-      });
-  
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+    message.error('Please check your input!');
   };
-
 
   return (
     <div className="login-form-container">
-    <Form
-        form={form}
+      <Form
+        name="login"
         className="login-form"
-        name="basic"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        style={{
-          maxWidth: 600,
-        }}
         initialValues={{
           remember: true,
         }}
-        autoComplete="off"
-    >
-      <Form.Item
-          label="Username"
-          name="username"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+      >
+        <Form.Item
+          name="email"
           rules={[
             {
               required: true,
-              message: 'Please input your username!',
+              message: 'Please input your email!',
             },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+            {
+              type: 'email',
+              message: 'Please enter a valid email address',
+            },
+          ]}
+        >
+          <Input
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="Email"
+            size="large"
+          />
+        </Form.Item>
 
-      <Form.Item
-          label="Password"
+        <Form.Item
           name="password"
           rules={[
             {
@@ -98,38 +95,26 @@ export default function Login() {
               message: 'Please input your password!',
             },
           ]}
-      >
-        <Input.Password />
-      </Form.Item>
+        >
+          <Input.Password
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            placeholder="Password"
+            size="large"
+          />
+        </Form.Item>
 
-      <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-      >
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
+        <Form.Item>
+          <Form.Item name="remember" valuePropName="checked" noStyle>
+            <Checkbox>Remember me</Checkbox>
+          </Form.Item>
+        </Form.Item>
 
-      <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-      >
-
-      <div className="button-group">
-          <Button className="login-form-button" type="primary" htmlType="submit" onClick={handleSignUpClick}>
-            Sign up
-          </Button>
-          <Button className="login-form-button" type="primary" htmlType="submit" onClick={handleSignInClick}>
+        <Form.Item>
+          <Button type="primary" htmlType="submit" className="login-form-button" size="large">
             Sign in
           </Button>
-      </div>
-      </Form.Item>
-    </Form>
-  </div>
-  )
+        </Form.Item>
+      </Form>
+    </div>
+  );
 }

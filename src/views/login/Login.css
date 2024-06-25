@@ -1,37 +1,16 @@
-/* 容器样式 */
+/* Login.css */
+
 .login-form-container {
-    display: flex;
-    justify-content: center; /* 水平居中 */
-    align-items: center; /* 垂直居中 */
-    min-height: 100vh; /* 设置容器最小高度为视口高度 */
-  }
-  
-  /* 表单样式 */
-  .login-form {
-    width: 400px;
-    padding: 20px; /* 添加内边距，使内容居中 */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* 输入框样式 */
-  .login-form-input {
-    width: 100%;
-    margin-bottom: 10px; /* 添加底部间距 */
-  }
-  
-  /* 按钮样式 */
-  .login-form-button {
-    width: 100%;
-  }
-  
-  .button-group {
-    display: flex;
-  }
-  
-  /* 为按钮之间添加一定的间距 */
-  .login-form-button + .login-form-button {
-    margin-left: 10px; /* 使用相邻兄弟选择器添加间距 */
-  }
-  
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  min-height: 100vh; /* 设置容器最小高度为视口高度 */
+}
+
+.login-form {
+  width: 400px;
+  padding: 20px; /* 添加内边距，使内容居中 */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
