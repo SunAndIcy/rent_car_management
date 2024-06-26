@@ -18,19 +18,15 @@ const CarForm = forwardRef((props, ref) => {
 
     let initialYear = moment(new Date(), 'YYYY'); // 默认值为当前年份的 moment 对象
 
-    // if (props.initialValues && props.initialValues.year) {
-    //     console.log(12121212);
-    //     if (typeof props.initialValues.year === 'string' || typeof props.initialValues.year === 'number') {
-    //         console.log(133333333);
-    //         initialYear = moment(props.initialValues.year, 'YYYY'); 
-    //         console.log(1111111111, initialYear);
-    //     } else if (moment.isMoment(props.initialValues.year)) {
-    //     initialYear = props.initialValues.year; 
-    //     }
-    // }
-
     return (
         <Form layout="vertical" ref={ref} initialValues={props.initialValues}>
+        <Form.Item
+            label="ID"
+            name="ID"
+            hidden
+          >
+            <Input type="hidden"/>
+        </Form.Item>
         <Form.Item
           label="Make"
           name="Make"

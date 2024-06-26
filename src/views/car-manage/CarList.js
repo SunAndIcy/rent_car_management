@@ -93,9 +93,10 @@ export default function CarList() {
 
             const yearDate = dayjs(value.year).format('YYYY');
     
-            const {Make, Model, Url , Mileage, Price_Per_Day, Available_Now } = value;
+            const { Make, Model, Url , Mileage, Price_Per_Day, Available_Now } = value;
     
             const updatedData = {
+                Id: currentUpdate.Id,
                 Make: Make,
                 Model: Model,
                 Url: Url,
@@ -107,14 +108,14 @@ export default function CarList() {
               
               axiosInstance.put(`/api/Cars/${currentUpdate.Id}`, updatedData)
               .then(response => {
-                console.log('Update successful:', response.data);
+                console.log('Update successful:', response);
                 const updatedDataSource = dataSource.map(item => {
                     if (item.Id === currentUpdate.Id) {
-                      return response.data;
+                      return updatedData;
                     }
                     return item;
                   });
-        
+
                 setDataSource(updatedDataSource);
               })
               .catch(error => {
