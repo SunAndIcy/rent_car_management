@@ -23,6 +23,7 @@ export default function RentList() {
     axios.get(`https://carrentalsystem-backend.azurewebsites.net/api/Rentals/all`)
       .then(response => {
         // 数据加载后对状态字段进行处理
+        console.log(11111, response.data );
         const dataWithMappedStatus = response.data.map(item => ({
           ...item,
           Status: Status[item.Status] || 'Pending' // 根据枚举值映射状态文本
@@ -35,9 +36,9 @@ export default function RentList() {
   };
 
   const handleStatusChange = (record, newStatus) => {
-      record.Status = newStatus;
-      
-      axiosInstance.put(`/api/Rentals/${record.Id}`, record)
+      // record.Status = newStatus;
+      const Status = newStatus;
+      axiosInstance.put(`/api/Rentals/status/${record.Id}`, {Status})
       .then(response => {
         message.success('Status updated successfully.');
         fetchRentals(); // 更新成功后重新加载数据
@@ -74,7 +75,6 @@ export default function RentList() {
   );
 
   const renderStatusMenu = (record) => {
-    console.log(1111, record);
     if (record.Status === 'Canceled') {
       return null; // 当 Status 等于 3 时返回 null，即不渲染菜单
     }

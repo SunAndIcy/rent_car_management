@@ -32,7 +32,7 @@ export default function Login() {
             if (response.data.Message === 'Login successful') {  
                 // 设置token                  
                 const authToken = response.data.Token;
-                Cookies.set('token', authToken, { expires: 7, path: '/' }); 
+                Cookies.set('adminToken', authToken, { expires: 7, path: '/' }); 
                 setToken(authToken); 
                 
                 // 保存user

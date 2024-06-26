@@ -1,10 +1,19 @@
 import React,{ useState, useEffect } from 'react'
 import { Table, Button } from "antd";
 import axios from 'axios'
+import UserForm from '../../components/user-manage/UserForm';
 
 export default function UserList() {
     const [dataSource, setdataSource] = useState([])
-    const [open, setopen] = useState(false)
+    const [formVisible, setFormVisible] = useState(false);
+
+    const handleButtonClick = () => {
+        setFormVisible(true);
+    };
+
+    const handleCloseForm = () => {
+        setFormVisible(false);
+    };
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -48,7 +57,10 @@ export default function UserList() {
       
   return (
     <div>
-    <Button type='primary' onClick={()=>{setopen(true)}}>Add User</Button>
+    <Button type="primary" onClick={handleButtonClick}>
+                Add admin user
+    </Button>
+    <UserForm visible={formVisible} onClose={handleCloseForm} />
     <Table dataSource={dataSource} columns={columns} 
     pagination={{
         pageSize:10

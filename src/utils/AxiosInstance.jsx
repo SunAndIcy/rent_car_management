@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
 // 请求拦截器
 axiosInstance.interceptors.request.use(
     (config) => {
-        const token = Cookies.get('token');
+        const token = Cookies.get('adminToken');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }

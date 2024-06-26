@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from '@ant-design/icons';
 import { Button, Layout, theme, Dropdown, Space, Avatar } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const { Header } = Layout;
 
@@ -13,6 +14,8 @@ export default function TopHeader({toggleCollapsed, collapsed}) {
   } = theme.useToken();
 
   const handleLogout = ()=>{
+    
+    Cookies.remove('adminToken'); 
     localStorage.removeItem("admin")
     navigate('/login');
   }
