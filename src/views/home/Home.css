@@ -1,0 +1,50 @@
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section h2 {
+  font-size: 24px;
+  color: #1890ff;
+  border-bottom: 2px solid #1890ff;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.feature {
+  margin-bottom: 20px;
+}
+
+.feature h3 {
+  font-size: 18px;
+  color: #1890ff;
+  margin-bottom: 10px;
+}
+
+.feature ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.mission {
+  margin-top: 20px;
+}
+
+.mission h2 {
+  font-size: 24px;
+  color: #1890ff;
+  margin-bottom: 16px;
+}
+
+.mission p {
+  line-height: 1.6;
+}

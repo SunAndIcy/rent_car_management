@@ -133,32 +133,32 @@ export default function CarList() {
 
       const columns = [
         {
-          title: 'ID',
+          title: 'ID|ID',
           dataIndex: 'Id',
           key: 'id',
         },
         {
-          title: 'Make',
+          title: 'Make|Hanga',
           dataIndex: 'Make',
           key: 'make',
         },
         {
-          title: 'Model',
+          title: 'Model|Tauira',
           dataIndex: 'Model',
           key: 'model',
         },
         {
-          title: 'Year',
+          title: 'Year|Tau',
           dataIndex: 'Year',
           key: 'year',
         },
         {
-          title: 'Mileage',
+          title: 'Mileage|Maero',
           dataIndex: 'Mileage',
           key: 'mileage',
         },
         {
-          title: 'Available Now',
+          title: 'Available Now|Kei te waatea inaianei',
           dataIndex: 'Available_Now',
           key: 'available_Now',
           render: (availableNow) => (
@@ -166,17 +166,17 @@ export default function CarList() {
           ),
         },
         {
-          title: 'Image',
+          title: 'Image|Whakaahua',
           dataIndex: 'Url',
           key: 'url',
         },
         {
-          title: 'Price Per Day',
+          title: 'Price Per Day|Utu Ia Ra',
           dataIndex: 'Price_Per_Day',
           key: 'price_Per_Day',
         },
         {
-            title: '操作',
+            title: 'Options|Kōwhiringa',
             render:(item)=>{
               return <div>
                  <Popconfirm

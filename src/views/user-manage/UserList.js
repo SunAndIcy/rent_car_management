@@ -31,22 +31,22 @@ export default function UserList() {
 
       const columns = [
         {
-          title: 'ID',
+          title: 'ID|ID',
           dataIndex: 'Id',
           key: 'id',
         },
         {
-          title: 'Username',
+          title: 'Username|Ingoa Kaiwhakamahi',
           dataIndex: 'Username',
           key: 'username',
         },
         {
-          title: 'Email',
+          title: 'Email|Īmēra',
           dataIndex: 'Email',
           key: 'email',
         },
         {
-          title: 'Admin',
+          title: 'Admin|Kaiwhakahaere',
           dataIndex: 'IsAdmin',
           key: 'isAdmin',
           render: (isAdmin) => (

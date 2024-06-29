@@ -96,52 +96,52 @@ export default function RentList() {
 
   const columns = [
     {
-      title: 'Id',
+      title: 'ID|ID',
       dataIndex: 'Id',
       key: 'id',
     },
     {
-      title: 'UserId',
+      title: 'UserId|KaiwhakamahiId',
       dataIndex: 'UserId',
       key: 'userId',
     },
     {
-      title: 'User name',
+      title: 'User name|Ingoa Kaiwhakamahi',
       dataIndex: 'UserName',
       key: 'username',
     },
     {
-      title: 'Car id',
+      title: 'CarId|Waka Id',
       dataIndex: 'CarId',
       key: 'carId',
     },
     {
-      title: 'Car make',
+      title: 'Car make|Hanga waka',
       dataIndex: 'CarMake',
       key: 'carMake',
     },
     {
-      title: 'Car model',
+      title: 'Car model|Tauira waka',
       dataIndex: 'CarModel',
       key: 'carModel',
     },
     {
-      title: 'Start date',
+      title: 'Start date|Te ra timata',
       dataIndex: 'StartDate',
       key: 'startDate',
     },
     {
-      title: 'End date',
+      title: 'End date|Te ra mutunga',
       dataIndex: 'EndDate',
       key: 'endDate',
     },
     {
-      title: 'Fee',
+      title: 'Fee|Utu',
       dataIndex: 'Fee',
       key: 'fee',
     },
     {
-      title: 'Status',
+      title: 'Status|Tūnga',
       dataIndex: 'Status',
       key: 'status',
       render: (status, record) => renderStatusAction(record),

@@ -11,39 +11,39 @@ export default function SideMenu({ collapsed }) {
 const menuList = [
   {
     key: "/home",
-    label: "Home",
+    label: "Kainga|Home",
     icon: <HomeOutlined />
   },
   {
     key: "/user-manage",
-    label: "User Manage",
+    label: "Whakahaere Kaiwhakamahi|User Manage",
     icon: <UserOutlined />,
     items: [
       {
         key: "/user-manage/list",
-        label: "User List",
+        label: "Rarangi Kaiwhakamahi|User List",
       }
     ]
   },
   {
     key: "/car-manage",
-    label: "Car Manage",
+    label: "Whakahaere Waka|Car Manage",
     icon: <CarOutlined />,
     items: [
       {
         key: "/car-manage/list",
-        label: "Car List",
+        label: "Rarangi waka|Car List",
       }
     ]
   },
   {
     key: "/rent-manage",
-    label: "Rent Manage",
+    label: "Whakahaere Reti|Rent Manage",
     icon: <OrderedListOutlined />,
     items: [
       {
         key: "/rent-manage/list",
-        label: "Rent List",
+        label: "Rarangi Reti|Rent List",
       }
     ]
   },
@@ -69,9 +69,13 @@ const renderMenuItems = (menuList) => {
 
 
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed}>
-    <div style={{display:"flex",height:"100%","flexDirection":"column"}}>
-    <div className="logo">Car Rent Manage System</div>
+    <Sider width={320} trigger={null} collapsible collapsed={collapsed}>
+    <div style={{display:"flex",height:"100%","flexDirection":"column"}}>   
+    <div style={{ marginBottom: '10px' }}>
+        {/* <div className="logo" style={{ height: '40px', lineHeight: '40px', textAlign: 'center', color: 'white' }}>Pūnaha Whakahaere Reti Waka</div> */}
+        <div className="logo" style={{ height: '40px', lineHeight: '40px', textAlign: 'center', color: 'white' }}>Car Rent Manage System</div>
+    </div>
+
     <div style={{flex:1,"overflow":"auto"}}> 
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
         {renderMenuItems(menuList)}
